@@ -6,6 +6,7 @@ namespace MoodAnalyser
     {
         public enum ExceptionType
         {
+            INVALID_INPUT,
             ENTERED_EMPTY,
             ENTERED_NULL
         }
