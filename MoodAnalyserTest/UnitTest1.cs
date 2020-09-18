@@ -27,5 +27,12 @@ namespace MoodAnalyserTest
             String mood = moodAnalyzer.analyseMood("This is a Happy Message");
             Assert.AreEqual("HAPPY", mood);
         }
+        [Test]
+        public void givenNullMood_ShouldReturn_Happy()
+        {
+            MoodAnalyserMain moodAnalyzer = new MoodAnalyserMain();
+            String mood = moodAnalyzer.analyseMood();
+            Assert.AreEqual("HAPPY", mood);
+        }
     }
 }

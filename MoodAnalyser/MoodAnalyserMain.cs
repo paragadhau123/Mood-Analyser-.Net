@@ -8,10 +8,21 @@ namespace MoodAnalyser
     {
         public String analyseMood(String message)
         {
-            if (message.Contains("Sad"))
-                return "SAD";
-            else
+            try
+            {
+                if (message.Contains("Sad"))
+                    return "SAD";
+                else
+                    return "HAPPY";
+            }catch (Exception e)
+            {
                 return "HAPPY";
+            }
+        }
+
+        public string analyseMood()
+        {
+            throw new NotImplementedException();
         }
     }
 }
