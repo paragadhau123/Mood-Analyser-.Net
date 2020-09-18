@@ -2,17 +2,13 @@
 
 namespace MoodAnalyser
 {
-    class Program
+   public class Program
     {
         static void Main(string[] args)
         {
-             String analyseMood(String message)
-            {
-                if (message.Contains("Sad"))
-                    return "SAD";
-                else
-                    return "HAPPY";
-            }
+            Console.WriteLine("Welcome to Mood Analyser Problem");
+        }
+       
         }
     }
-}
+
