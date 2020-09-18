@@ -6,23 +6,33 @@ namespace MoodAnalyser
 {
     public class MoodAnalyserMain
     {
-        public String analyseMood(String message)
+        string message;
+
+        public MoodAnalyserMain(string message)
+        {
+            this.message = message;
+        }
+        public string getMood()
         {
             try
             {
-                if (message.Contains("Sad"))
+                if (message.Length == 0)
+
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, "you have entered invalid input");
+
+                if (message.Contains("sad"))
+
                     return "SAD";
+
                 else
+
                     return "HAPPY";
-            }catch (Exception e)
+            }
+            catch (NullReferenceException e)
             {
-                return "HAPPY";
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "you have entered invalid input");
             }
         }
 
-        public string analyseMood()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -12,27 +12,75 @@ namespace MoodAnalyserTest
         {
         }
 
+        /*
+        *This Test Case Excepts
+        * Sad Mood
+        */
         [Test]
-        public void givenMessgae_WhenSad_ShouldReturn_Sad()
+         public void WhenGivenSadMessage_ShouldReturnSad()
         {
-            MoodAnalyserMain moodAnalyzer = new MoodAnalyserMain();
-            String mood = moodAnalyzer.analyseMood("This is a Sad Message");
-            Assert.AreEqual("SAD", mood);
+            try
+            {
+                MoodAnalyserMain m = new MoodAnalyserMain("i am in sad mood");
+                string result = m.getMood(); ;
+                Assert.AreEqual("SAD", result);
+            }
+            catch (MoodAnalyserException e)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.INVALID_INPUT, "YOU HAVE ENTERED AN INVALID INPUT");
+            }
         }
-
+            /*
+            *This Test Case Excepts
+            * Any Other Mood
+            */
         [Test]
-        public void givenMessage_WhenNotSad_ShouldReturn_Happy()
+        public void WhenGivenHappyMessage_ShouldReturnHappy()
         {
-            MoodAnalyserMain moodAnalyzer = new MoodAnalyserMain();
-            String mood = moodAnalyzer.analyseMood("This is a Happy Message");
-            Assert.AreEqual("HAPPY", mood);
+            try
+            {
+                MoodAnalyserMain m = new MoodAnalyserMain("i am in any mood");
+                string result = m.getMood();
+                Assert.AreEqual("HAPPY", result);
+            }
+            catch (MoodAnalyserException e)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.INVALID_INPUT, "YOU HAVE ENTERED AN INVALID INPUT");
+            }
         }
+        /*
+        *This Test Case Will Check For
+        * Null Pointer Exception
+        */
         [Test]
-        public void givenNullMood_ShouldReturn_Happy()
+        public void WhenGivenNullMessage_ShouldThrowMoodAnalyserException()
         {
-            MoodAnalyserMain moodAnalyzer = new MoodAnalyserMain();
-            String mood = moodAnalyzer.analyseMood();
-            Assert.AreEqual("HAPPY", mood);
+            try
+            {
+                MoodAnalyserMain m = new MoodAnalyserMain(null);
+                string result = m.getMood();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.type);
+            }
+        }
+        /*
+        *This Test Case Will Check For
+        * for empty and null values
+        */
+        [Test]
+        public void WhenGivenEmptyMessage_ShouldThrowMoodAnalyserException()
+        {
+            try
+            {
+                MoodAnalyserMain m = new MoodAnalyserMain("");
+                string result = m.getMood();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
+            }
         }
     }
 }

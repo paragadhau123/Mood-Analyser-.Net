@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MoodAnalyser
 {
-    class MoodAnalyserException : Exception
+    public class MoodAnalyserException : Exception
     {
         public enum ExceptionType
         {
-            INVALID_INPUT,
             ENTERED_EMPTY,
             ENTERED_NULL
         }
+
         public ExceptionType type;
         String message;
 
