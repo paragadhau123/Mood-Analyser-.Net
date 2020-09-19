@@ -18,15 +18,21 @@ namespace MoodAnalyser
         /// </summary>
         /// <param name="noOfParameters"> no of paramters in constructor </param>
         /// <returns></returns>
-        public ConstructorInfo GetConstructor(int noOfParameters = 0)
+        public ConstructorInfo GetConstructor(int noOfParameters)
         {
-            ConstructorInfo[] constructors = type.GetConstructors();
-            foreach (ConstructorInfo constructor in constructors)
+            try
             {
-                if (constructor.GetParameters().Length == noOfParameters)
-                    return constructor;
+                ConstructorInfo[] constructors = type.GetConstructors();
+                foreach (ConstructorInfo constructor in constructors)
+                {
+                    if (constructor.GetParameters().Length == noOfParameters)
+                        return constructor;
+                }
+                return constructors[0];
             }
-            return constructors[0];
+            catch (Exception) { 
+             throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "Class not found");
+            }
         }
 
         public object CreateObjectUsingClass(string className)

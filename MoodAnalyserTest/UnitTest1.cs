@@ -76,7 +76,7 @@ namespace MoodAnalyserTest
             string className = "MoodAnalysermain";
             MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
             object createdObject = moodAnalyserFactory.CreateObjectUsingClass(className);
-            Object.Equals(expected, createdObject);
+            Assert.AreEqual(expected, createdObject);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MoodAnalyserTest
             string className = "Hello";
             MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
             object createdObject = moodAnalyserFactory.CreateObjectUsingClass(className);
-            Object.Equals(expected, createdObject);
+            Assert.AreEqual(expected, createdObject);
         }
 
         /// <summary>
@@ -101,9 +101,9 @@ namespace MoodAnalyserTest
             string expected = "No Such Method exists";
 
             MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
-            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor();
-            object createdObject = moodAnalyserFactory.CreateObjectUsingConstructor(constructor, 3);
-            Object.Equals(expected, createdObject);
+            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
+            object createdObject = moodAnalyserFactory.CreateObjectUsingConstructor(constructor, 1);
+            Assert.AreEqual(expected, createdObject);
         }
     }
 }
