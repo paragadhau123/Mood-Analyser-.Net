@@ -12,75 +12,56 @@ namespace MoodAnalyserTest
         {
         }
 
-        /*
-        *This Test Case Excepts
-        * Sad Mood
-        */
+        /// <summary>
+        /// Test Case 1.1 : Given "I am in Sad mood message", Test will pass if moodAnalyser Returns "Sad"
+        /// </summary>
         [Test]
-         public void WhenGivenSadMessage_ShouldReturnSad()
+        public void GivenSadMood_ShouldReturnSad()
         {
-            try
-            {
-                MoodAnalyserMain m = new MoodAnalyserMain("i am in sad mood");
-                string result = m.getMood(); ;
-                Assert.AreEqual("SAD", result);
-            }
-            catch (MoodAnalyserException e)
-            {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.INVALID_INPUT, "YOU HAVE ENTERED AN INVALID INPUT");
-            }
+            string expected = "Sad";
+            string message = "I am in Sad mood";
+            MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
+            string mood = moodAnalyser.AnalyseMood();
+            Assert.AreEqual(expected, mood);
         }
-            /*
-            *This Test Case Excepts
-            * Any Other Mood
-            */
+
+        /// <summary>
+        /// Test Case 1.2 : Given "I am in any mood message", Test will pass if moodAnalyser Returns "Happy"
+        /// </summary>
         [Test]
-        public void WhenGivenHappyMessage_ShouldReturnHappy()
+        public void GivenAnyMood_ShouldReturnHappy()
         {
-            try
-            {
-                MoodAnalyserMain m = new MoodAnalyserMain("i am in any mood");
-                string result = m.getMood();
-                Assert.AreEqual("HAPPY", result);
-            }
-            catch (MoodAnalyserException e)
-            {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.INVALID_INPUT, "YOU HAVE ENTERED AN INVALID INPUT");
-            }
+            string expected = "Happy";
+            string message = "I am in any mood";
+            MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
+            string mood = moodAnalyser.AnalyseMood();
+            Assert.AreEqual(expected, mood);
         }
-        /*
-        *This Test Case Will Check For
-        * Null Pointer Exception
-        */
+
+        /// <summary>
+        /// Test Case 3.1 : Given null , Test will pass if moodAnalyser throws MoodAnalysisException
+        /// </summary>
         [Test]
-        public void WhenGivenNullMessage_ShouldThrowMoodAnalyserException()
+        public void GivenNullMood_ShouldThrowException()
         {
-            try
-            {
-                MoodAnalyserMain m = new MoodAnalyserMain(null);
-                string result = m.getMood();
-            }
-            catch (MoodAnalyserException e)
-            {
-                Assert.AreEqual(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.type);
-            }
+            string expected = "Enetered Null, Please Enter Proper Mood";
+            string message = null;
+            MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
+            string mood = moodAnalyser.AnalyseMood();
+            Assert.AreEqual(expected, mood);
         }
-        /*
-        *This Test Case Will Check For
-        * for empty and null values
-        */
+
+        /// <summary>
+        /// Test Case 3.2 : Given empty message , Test will pass if moodAnalyser throws MoodAnalysisException
+        /// </summary>
         [Test]
-        public void WhenGivenEmptyMessage_ShouldThrowMoodAnalyserException()
+        public void GivenEmptyMood_ShouldThrowException()
         {
-            try
-            {
-                MoodAnalyserMain m = new MoodAnalyserMain("");
-                string result = m.getMood();
-            }
-            catch (MoodAnalyserException e)
-            {
-                Assert.AreEqual(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
-            }
+            string expected = "Empty message, Please enter Proper Mood";
+            string message = "";
+            MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
+            string mood = moodAnalyser.AnalyseMood();
+            Assert.AreEqual(expected, mood);
         }
     }
 }

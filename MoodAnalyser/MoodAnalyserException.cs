@@ -2,22 +2,19 @@
 
 namespace MoodAnalyser
 {
-    public class MoodAnalyserException : Exception
+    public class MoodAnalysisException : Exception
     {
+
         public enum ExceptionType
         {
-            INVALID_INPUT,
-            ENTERED_EMPTY,
-            ENTERED_NULL
+            EnteredNull, EnteredEmpty
         }
 
-        public ExceptionType type;
-        String message;
+        readonly ExceptionType exceptionType;
 
-        public MoodAnalyserException(ExceptionType type, String message)
+        public MoodAnalysisException(ExceptionType exceptionType, string exceptionMessage) : base(exceptionMessage)
         {
-            this.type = type;
-            this.message = message;
+            this.exceptionType = exceptionType;
 
         }
     }
