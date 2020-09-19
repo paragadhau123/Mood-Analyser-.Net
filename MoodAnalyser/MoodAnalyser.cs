@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 
 namespace MoodAnalyser
 {
@@ -71,8 +72,11 @@ namespace MoodAnalyser
                     return exception.Message;
                 }
             }
-
+        public static explicit operator ConstructorInfo(MoodAnalysermain v)
+        {
+            throw new NotImplementedException();
         }
+    }
        
     }
 

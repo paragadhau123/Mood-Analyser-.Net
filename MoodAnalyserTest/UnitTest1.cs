@@ -2,6 +2,9 @@
 using MoodAnalyser;
 using NUnit.Framework;
 using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
 
 namespace MoodAnalyserTest
 {
@@ -71,10 +74,35 @@ namespace MoodAnalyserTest
         {
             object expected = new MoodAnalysermain();
             string className = "MoodAnalysermain";
-            MoodAnalyserFactory moodAnalyserFactory  = new MoodAnalyserFactory();
-            object createdObject = moodAnalyserFactory.CreateObject(className);
-            Console.WriteLine(expected);
-            Console.WriteLine(createdObject);
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            object createdObject = moodAnalyserFactory.CreateObjectUsingClass(className);
+            Object.Equals(expected, createdObject);
+        }
+
+        /// <summary>
+        /// Test Case 4.2 : Given class name when imporper , Test will pass if Mood AnalyserFactory throws an exception
+        /// </summary>
+        [Test]
+        public void GivenClassName_WhenImproper_ShouldthrowException()
+        {
+            string expected = "No Such class exists";
+            string className = "Hello";
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            object createdObject = moodAnalyserFactory.CreateObjectUsingClass(className);
+            Object.Equals(expected, createdObject);
+        }
+
+        /// <summary>
+        /// Test Case 4.2 : Given constructor when imporper , Test will pass if Mood AnalyserFactory throws an exception
+        /// </summary>
+        [Test]
+        public void GivenConstructor_WhenImproper_ShouldthrowException()
+        {
+            string expected = "No Such Method exists";
+
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor();
+            object createdObject = moodAnalyserFactory.CreateObjectUsingConstructor(constructor, 3);
             Object.Equals(expected, createdObject);
         }
     }

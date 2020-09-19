@@ -29,14 +29,29 @@ namespace MoodAnalyser
             return constructors[0];
         }
 
-        public object CreateObject(string className)
+        public object CreateObjectUsingClass(string className)
         {
             try
             {
                 if (className != type.Name)
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "Class does not exist");
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "No Such class exists");
 
-                 object createdObject = Activator.CreateInstance(className, type.FullName);
+                object createdObject = Activator.CreateInstance(className, type.FullName);
+                return createdObject;
+            }
+            catch (MoodAnalysisException exception)
+            {
+                return exception.Message;
+            }
+        }
+        public object CreateObjectUsingConstructor(ConstructorInfo constructor, int noOfParameters)
+        {
+            try
+            {
+                if (constructor != GetConstructor(noOfParameters))
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod, "No Such Method exists");
+
+                object createdObject = constructor.Invoke(new object[0]);
                 return createdObject;
             }
             catch (MoodAnalysisException exception)

@@ -7,7 +7,7 @@ namespace MoodAnalyser
 
         public enum ExceptionType
         {
-            EnteredNull, EnteredEmpty, ClassNotFound
+            EnteredNull, EnteredEmpty, ClassNotFound, NoSuchClass, NoSuchMethod
         }
 
         readonly ExceptionType exceptionType;
