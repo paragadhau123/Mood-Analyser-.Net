@@ -98,14 +98,14 @@ namespace MoodAnalyserTest
             try
             {
                 
-                string className = "MoodAnalysermain";
+                string className = "MoodAnalyser";
                 MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
                 ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
                 object createdObject = moodAnalyserFactory.CreateObjectUsingConstructor(className, constructor, 1);
              
             }catch(MoodAnalysisException e)
             {
-                Assert.AreEqual(MoodAnalysisException.ExceptionType.EnteredEmpty, e.type);
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.ClassNotFound, e.type);
 
             }
         }
@@ -113,34 +113,56 @@ namespace MoodAnalyserTest
         [Test]
         public void GivenMoodAnalyser_WhenProper_ShouldReturnObject()
         {
-           
-                object expected = new MoodAnalysermain("I am in happy mood");
+            try
+            {
                 string className = "MoodAnalysermain";
                 string parameter = "I am in happy mood";
                 MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
                 ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
-                object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
-               
+                object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, "I am in happy mood");
+
                 Assert.IsInstanceOf(typeof(MoodAnalysermain), createdObject);
+            }catch(MoodAnalysisException e)
+            {
+
             }
+        }
         [Test]
         public void GivenConstructor_WhenImproper_ShouldThrowException()
         {
-           
-            string className = "MoodAnalyser";
-            string parameter = "I am in happy mood";
-            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
-            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
-            object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
-           
+            try
+            {
+                string className = "MoodAnalyser";
+                string parameter = "I am in happy mood";
+                MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+                ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
+                object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.ClassNotFound, e.type);
+
+            }
         }
         [Test]
         public void GivenHappyMessage_WhenProper_ShouldReturnHappy()
         {
             string expected = "Happy";
             MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
-            dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("I am in happy mood");
+            dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("AnalyseMood", "I am in happy mood");
             Assert.AreEqual(expected, mood);
         }
+        [Test]
+        public void GivenHappyMessage_WhenImroper_ShouldThrowException()
+        {
+            try
+            {
+                MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+                dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("Mood", "I am in happy mood");
+            }catch(MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.NoSuchMethod, e.type);
+            }
+        }
+      }
     }
-}

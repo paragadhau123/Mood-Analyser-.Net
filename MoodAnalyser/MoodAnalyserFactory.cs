@@ -53,44 +53,46 @@ namespace MoodAnalyser
                 object createdObject = constructor.Invoke(new object[0]);
                 return createdObject;
             }
-            catch (MoodAnalysisException exception)
+            catch (Exception e)
             {
-                return exception.Message;
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "Class not found");
             }
         }
        
-        public object CreateObjectUsingParameterizedConstructor(string class_name, ConstructorInfo constructor, string parameterValue)
+        public object CreateObjectUsingParameterizedConstructor(string className, ConstructorInfo constructor, string parameterValue)
         {
             try
             {
-               
-                if (class_name != type.Name)
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound ,"No such class");
-              
+                Type type = Type.GetType(className);
+                if (className != type.Name)
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "No such class");
+                }
                 if (constructor != type.GetConstructors()[1])
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod ,"No such Method Found");
-               
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod, "No such Method Found");
+                }
                 Object Object_return = Activator.CreateInstance(type, parameterValue);
                 return Object_return;
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                return exception.Message;
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ClassNotFound, "Class not found");
             }
         }
-        public dynamic InvokeMoodAnalyser(object parameter)
+        public dynamic InvokeMoodAnalyser(string methodName,object parameter)
         {
             try
             {
 
-                MethodInfo method = type.GetMethod("AnalyseMood");
+                if (methodName != "AnalyseMood")
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod, "Error ! Cannot invoke MoodAnalyser");
+                }
+                MethodInfo method = type.GetMethod(methodName);
                 object createdObject = Activator.CreateInstance(type, parameter);
                 method.Invoke(createdObject, null);
                 return "Happy";
-            }
-            catch (MoodAnalysisException)
-            {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod, "Error ! Cannot invoke MoodAnalyser");
             }
             catch (Exception exception)
             {
