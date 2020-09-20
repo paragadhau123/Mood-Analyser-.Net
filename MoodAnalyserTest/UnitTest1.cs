@@ -133,5 +133,13 @@ namespace MoodAnalyserTest
             object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
             Assert.AreEqual(expected, createdObject);
         }
+        [Test]
+        public void GivenHappyMessage_WhenProper_ShouldReturnHappy()
+        {
+            string expected = "Happy";
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("I am in happy mood");
+            Assert.AreEqual(expected, mood);
+        }
     }
 }
