@@ -93,7 +93,7 @@ namespace MoodAnalyserTest
         }
 
         /// <summary>
-        /// Test Case 4.2 : Given constructor when imporper , Test will pass if Mood AnalyserFactory throws an exception
+        /// Test Case 4.3 : Given constructor when imporper , Test will pass if Mood AnalyserFactory throws an exception
         /// </summary>
         [Test]
         public void GivenConstructor_WhenImproper_ShouldthrowException()
@@ -104,6 +104,20 @@ namespace MoodAnalyserTest
             ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
             object createdObject = moodAnalyserFactory.CreateObjectUsingConstructor(constructor, 1);
             Assert.AreEqual(expected, createdObject);
+        }
+        /// <summary>
+        /// Test Case 5.1 : Given class name , Test will pass if Mood AnalyserFactory creates object of given class name
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyser_WhenProper_ShouldReturnObject()
+        {
+            object expected = new MoodAnalysermain("I am in happy mood");
+            string className = "MoodAnalyser";
+            string parameter = "I am in happy mood";
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
+            object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
+            Object.Equals(expected, createdObject);
         }
     }
 }

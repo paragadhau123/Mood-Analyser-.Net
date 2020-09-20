@@ -70,6 +70,13 @@ namespace MoodAnalyser
                 return exception.Message;
             }
         }
+        /// <summary>
+        /// method to instanciate object using paramterized constructor
+        /// </summary>
+        /// <param name="class_name"></param>
+        /// <param name="constructor"></param>
+        /// <param name="parameterValue"></param>
+        /// <returns></returns>
         public object CreateObjectUsingParameterizedConstructor(string class_name, ConstructorInfo constructor, string parameterValue)
         {
             try
@@ -86,7 +93,7 @@ namespace MoodAnalyser
                 Object Object_return = Activator.CreateInstance(type, parameterValue);
                 return Object_return;
             }
-            catch (Exception ex) { return null; }
+            catch (Exception ) { return null; }
         }
     }
 }
