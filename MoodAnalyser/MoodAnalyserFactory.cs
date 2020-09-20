@@ -93,7 +93,10 @@ namespace MoodAnalyser
                 Object Object_return = Activator.CreateInstance(type, parameterValue);
                 return Object_return;
             }
-            catch (Exception ) { return null; }
+            catch (Exception exception)
+            {
+                return exception.Message;
+            }
         }
     }
 }

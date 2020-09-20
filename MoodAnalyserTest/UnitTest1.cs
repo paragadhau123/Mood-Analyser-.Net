@@ -106,7 +106,7 @@ namespace MoodAnalyserTest
             Assert.AreEqual(expected, createdObject);
         }
         /// <summary>
-        /// Test Case 4.1 : Given class name , Test will pass if Mood AnalyserFactory creates object of given class name
+        /// Test Case 5.1 : Given class name , Test will pass if Mood AnalyserFactory creates object of given class name
         /// </summary>
         [Test]
         public void GivenMoodAnalyser_WhenProper_ShouldReturnObject()
