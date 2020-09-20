@@ -10,12 +10,13 @@ namespace MoodAnalyser
             EnteredNull, EnteredEmpty, ClassNotFound, NoSuchClass, NoSuchMethod, ErrorInObjectCreation
         }
 
-        readonly ExceptionType exceptionType;
+        public ExceptionType type;
+        string message;
 
-        public MoodAnalysisException(ExceptionType exceptionType, string exceptionMessage) : base(exceptionMessage)
+        public MoodAnalysisException(ExceptionType type, string message) 
         {
-            this.exceptionType = exceptionType;
-
+            this.type = type;
+            this.message = message;
         }
     }
 }
