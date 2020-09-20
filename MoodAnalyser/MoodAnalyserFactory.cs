@@ -85,7 +85,7 @@ namespace MoodAnalyser
             try
             {
 
-                if (methodName != "AnalyseMood")
+                if (methodName != "AnalyseMood1")
                 {
                     throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NoSuchMethod, "Error ! Cannot invoke MoodAnalyser");
                 }
@@ -105,7 +105,7 @@ namespace MoodAnalyser
             {
                 Type type = Type.GetType(className);
                 dynamic change_mood = Activator.CreateInstance(type, mood);
-                MethodInfo method = type.GetMethod("getMood");
+                MethodInfo method = type.GetMethod("AnalyseMood");
                 dynamic value = method.Invoke(change_mood, new object[] { mood });
                 return value;
             }

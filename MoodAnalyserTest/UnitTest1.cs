@@ -20,7 +20,7 @@ namespace MoodAnalyserTest
             string expected = "Sad";
             string message = "I am in Sad mood";
             MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
-            string mood = moodAnalyser.AnalyseMood();
+            string mood = moodAnalyser.AnalyseMood1();
             Assert.AreEqual(expected, mood);
         }
         [Test]
@@ -29,7 +29,7 @@ namespace MoodAnalyserTest
             string expected = "Happy";
             string message = "I am in any mood";
             MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
-            string mood = moodAnalyser.AnalyseMood();
+            string mood = moodAnalyser.AnalyseMood1();
             Assert.AreEqual(expected, mood);
         }
         [Test]
@@ -40,7 +40,7 @@ namespace MoodAnalyserTest
                 string expected = "Enetered Null, Please Enter Proper Mood";
                 string message = null;
                 MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
-                string mood = moodAnalyser.AnalyseMood();
+                string mood = moodAnalyser.AnalyseMood1();
                 //Assert.AreEqual(expected, mood);
             }
             catch (MoodAnalysisException e)
@@ -57,7 +57,7 @@ namespace MoodAnalyserTest
                 
                 string message = "";
                 MoodAnalysermain moodAnalyser = new MoodAnalysermain(message);
-                string mood = moodAnalyser.AnalyseMood();
+                string mood = moodAnalyser.AnalyseMood1();
               
             }
             catch (MoodAnalysisException e)
@@ -149,7 +149,7 @@ namespace MoodAnalyserTest
         {
             string expected = "Happy";
             MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
-            dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("AnalyseMood", "I am in happy mood");
+            dynamic mood = moodAnalyserFactory.InvokeMoodAnalyser("AnalyseMood1", "I am in happy mood");
             Assert.AreEqual(expected, mood);
         }
         [Test]
@@ -164,5 +164,24 @@ namespace MoodAnalyserTest
                 Assert.AreEqual(MoodAnalysisException.ExceptionType.NoSuchMethod, e.type);
             }
         }
-      }
+        [Test]
+        public void Change_Mood_Dynamically()
+        {
+            dynamic result = MoodAnalyserFactory.ChangeTheMood("MoodAnalyser.MoodAnalysermain", "Happy");
+            Assert.AreEqual("Happy", result);
+        }
+        [Test]
+        public void ChangeMoodDynamically_WhenNull_ShouldThrowException()
+        {
+            try
+            {
+                dynamic result = MoodAnalyserFactory.ChangeTheMood("MoodAnalyserProblem.MoodAnalyserMain", null);
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(MoodAnalysisException.ExceptionType.EnteredNull, e.type);
+            }
+        }
+
     }
+}

@@ -35,8 +35,11 @@ namespace MoodAnalyser
                 this.Message = message;
             }
 
-
-            public string AnalyseMood()
+        public String AnalyseMood1()
+        {
+            return this.AnalyseMood(Message);
+        }
+            public string AnalyseMood(String m)
             {
                 try
                 {
@@ -51,9 +54,9 @@ namespace MoodAnalyser
                     else
                         return "Happy";
                 }
-                catch (MoodAnalysisException exception)
+                catch (Exception e)
                 {
-                    return exception.Message;
+                    return e.Message;
                 }
             }
        
