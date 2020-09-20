@@ -106,7 +106,7 @@ namespace MoodAnalyserTest
             Assert.AreEqual(expected, createdObject);
         }
         /// <summary>
-        /// Test Case 5.1 : Given class name , Test will pass if Mood AnalyserFactory creates object of given class name
+        /// Test Case 5.2 : Given class name , Test will pass if Mood AnalyserFactory creates object of given class name
         /// </summary>
         [Test]
         public void GivenMoodAnalyser_WhenProper_ShouldReturnObject()
@@ -118,6 +118,20 @@ namespace MoodAnalyserTest
             ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
             object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
             Object.Equals(expected, createdObject);
+        }
+        /// <summary>
+        /// Test Case 5.3 : Given wrong constructor paramter , Test will pass if Mood AnalyserFactory throws exception sayinh no such class
+        /// </summary>
+        [Test]
+        public void GivenConstructor_WhenImproper_ShouldThrowException()
+        {
+            string expected = "No such Method Found";
+            string className = "MoodAnalyser";
+            string parameter = "I am in happy mood";
+            MoodAnalyserFactory moodAnalyserFactory = new MoodAnalyserFactory();
+            ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(2);
+            object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor(className, constructor, parameter);
+            Assert.AreEqual(expected, createdObject);
         }
     }
 }
