@@ -99,5 +99,20 @@ namespace MoodAnalyser
                 return exception.Message;
             }
         }
+        public static dynamic ChangeTheMood(string className, string mood)
+        {
+            try
+            {
+                Type type = Type.GetType(className);
+                dynamic change_mood = Activator.CreateInstance(type, mood);
+                MethodInfo method = type.GetMethod("getMood");
+                dynamic value = method.Invoke(change_mood, new object[] { mood });
+                return value;
+            }
+            catch (Exception e)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EnteredNull, e.Message);
+            }
+        }
     }
 }
