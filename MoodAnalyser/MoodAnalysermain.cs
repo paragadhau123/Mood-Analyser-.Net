@@ -1,66 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="MoodAnalysermain.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace MoodAnalyser
 {
+    using System;
 
+    /// <summary>
+    /// MoodAnalyzer main Class
+    /// </summary>
     public class MoodAnalysermain
-    {
-       
-        public static void Main(string[] args)
-        {
-           
-        }
-    
-       
-            public int name = 19;
-           
-            private string _message;
-
-            
-            private string Message
-            {
-                get { return this._message; }
-                set { this._message = value; }
-            }
-
-           
-            public MoodAnalysermain() { }
-
-           
-            public MoodAnalysermain(string message)
+    {        
+        /// <summary>
+        /// Message variable
+        /// </summary>
+        private string message;
+                              
+        public MoodAnalysermain(string message)
             {
                 this.Message = message;
             }
 
-        public String AnalyseMood1()
+        public MoodAnalysermain()
         {
-            return this.AnalyseMood(Message);
         }
-            public string AnalyseMood(String m)
+
+        /// <summary>
+        /// Gets or sets message
+        /// </summary>
+        private string Message
+        {
+            get
+            {
+                return this.message;
+            }
+
+            set
+            {
+                this.message = value;
+            }
+        }
+
+        /// <summary>
+        /// Main Method
+        /// </summary>
+        /// <param name="args">String argument</param>
+        public static void Main(string[] args)
+        {
+        }
+
+        /// <summary>
+        /// Method to validate first name
+        /// </summary>       
+        /// <returns>mood happy or sad</returns>
+        public string AnalyseMood1()
+        {
+            return this.AnalyseMood(this.Message);
+        }
+
+        /// <summary>
+        /// Method to validate first name
+        /// </summary>
+        /// <param name="m">first name to validate</param>
+        /// <returns>mood happy or sad</returns>
+        public string AnalyseMood(string m)
             {
                 try
                 {
-                    if (this.Message == null)
-                        throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EnteredNull, "Enetered Null, Please Enter Proper Mood");
-
-                    if (this.Message.Length == 0)
-                        throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EnteredEmpty, "Empty message, Please enter Proper Mood");
-
-                    if (this.Message.Contains("sad", StringComparison.OrdinalIgnoreCase))
-                        return "Sad";
-                    else
-                        return "Happy";
+                if (this.Message == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EnteredNull, "Enetered Null, Please Enter Proper Mood");
                 }
-                catch (Exception e)
+
+                if (this.Message.Length == 0)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EnteredEmpty, "Empty message, Please enter Proper Mood");
+                }
+
+                if (this.Message.Contains("sad", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "Sad";
+                }
+                else
+                {
+                    return "Happy";
+                }
+            }
+            catch (Exception e)
                 {
                     return e.Message;
                 }
+              }
             }
-       
-    }
-       
-    }
-
+         }  

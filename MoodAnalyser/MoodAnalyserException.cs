@@ -1,22 +1,67 @@
-﻿using System;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="MoodAnalyserException.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace MoodAnalyser
 {
-    public class MoodAnalysisException : Exception
-    {
+    using System;
 
-        public enum ExceptionType
+    /// <summary>
+    /// MoodAnalysisException Class
+    /// </summary>
+    public class MoodAnalyserException : Exception
+    {
+        /// <summary>
+        /// Message Variable
+        /// </summary>
+        public readonly string MESSAGE;
+
+        /// <summary>
+        /// Type Variable
+        /// </summary>
+        public ExceptionType TYPE;
+       
+        public MoodAnalyserException(ExceptionType type, string message)
         {
-            EnteredNull, EnteredEmpty, ClassNotFound, NoSuchClass, NoSuchMethod, ErrorInObjectCreation
+            this.TYPE = type;
+            this.MESSAGE = message;
         }
 
-        public ExceptionType type;
-        string message;
-
-        public MoodAnalysisException(ExceptionType type, string message) 
+        /// <summary>
+        /// Class Enum
+        /// </summary>
+        public enum ExceptionType
         {
-            this.type = type;
-            this.message = message;
+            /// <summary>
+            /// When null
+            /// </summary>
+            EnteredNull,
+
+            /// <summary>
+            /// When empty
+            /// </summary>
+            EnteredEmpty,
+
+            /// <summary>
+            /// When Class not found
+            /// </summary>
+            ClassNotFound,
+
+            /// <summary>
+            /// When no such Class 
+            /// </summary>
+            NoSuchClass,
+
+            /// <summary>
+            ///  When no such method
+            /// </summary>
+            NoSuchMethod,
+
+            /// <summary>
+            ///  When no there is error
+            /// </summary>
+            ErrorInObjectCreation
         }
     }
 }
