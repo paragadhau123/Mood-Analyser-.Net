@@ -41,6 +41,28 @@ namespace MoodAnalyser
         }
 
         /// <summary>
+        /// Method for set field
+        /// </summary>
+        /// <param name="message">total distance</param>
+        /// <param name="fieldName">total distance</param>
+        /// <returns>return message</returns>
+        public static string SetField(string message, string fieldName)
+        {
+            try
+            {
+                MoodAnalysermain moodAnalysemain = new MoodAnalysermain();
+                Type type = typeof(MoodAnalysermain);
+                FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                field.SetValue(moodAnalysemain, message);
+                return moodAnalysemain.Message;
+            }
+            catch (Exception)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EnteredNull, "Message is never null");
+            }
+        }
+
+        /// <summary>
         /// Method to validate first name
         /// </summary>
         /// <param name="noOfParameters">define type</param>

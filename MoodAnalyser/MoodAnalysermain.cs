@@ -15,8 +15,8 @@ namespace MoodAnalyser
         /// <summary>
         /// Message variable
         /// </summary>
-        private string message;
-                              
+        public string message;
+       
         public MoodAnalysermain(string message)
             {
                 this.Message = message;
@@ -29,7 +29,7 @@ namespace MoodAnalyser
         /// <summary>
         /// Gets or sets message
         /// </summary>
-        private string Message
+        public string Message
         {
             get
             {
@@ -60,7 +60,7 @@ namespace MoodAnalyser
         }
 
         /// <summary>
-        /// Method to validate first name
+        /// Method to Analyze mood
         /// </summary>
         /// <param name="m">first name to validate</param>
         /// <returns>mood happy or sad</returns>
